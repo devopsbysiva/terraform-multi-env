@@ -1,0 +1,41 @@
+The task is to create 2 environments "dev" and "prod"
+use remote state. create seperate remote state files for dev and prod.
+let say
+prod: 
+s3bucket: 81s-remote-state-prod
+dynamodb: 81s-locking-prod
+
+dev :
+s3bucket: 81s-remote-state-dev
+dynamodb: 81s-locking-dev
+
+the above setup is for for backend.
+
+now create 3 ec2 instance and 3r53 records.
+Prod:
+name: mysql_prod -->t2.small
+backend_prod -->t2.micro,
+frontend_prod -->t2.micro
+
+r53 records:
+mysql_prod.devgani.online 
+backend_prod.devgani.online
+devgani.online
+
+dev:
+name: mysql_dev -->t3.micro
+backend_dev -->t2.micro
+frontend_dev -->t2.micro
+
+r53 records:
+mysql_dev.devgani.online 
+backend_dev.devgani.online
+frontend_dev.devgani.online
+
+Here we will be using the only ec2 resource .tf file,and will use the .tfvars file to pass variables for prod sepeartely and dev seperately.
+
+
+
+
+
+
